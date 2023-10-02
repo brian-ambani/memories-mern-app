@@ -10,10 +10,11 @@ app.use(bodyparser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 const CONNECTION_URL =
-  "mongodb+srv://firstmernapp:firstmernapp123@cluster0.ogytrpr.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://memoryapp:memoryapp123@mernapp.isif22e.mongodb.net/?retryWrites=true&w=majority";
 
-const PORT = 5000;
+const PORT = 5500;
 
+mongoose.set("strictQuery", false);
 mongoose
   .connect(CONNECTION_URL, {
     useNewUrlParser: true,

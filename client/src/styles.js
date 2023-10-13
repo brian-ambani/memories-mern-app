@@ -11,8 +11,8 @@ export default makeStyles(() => ({
   heading: {
     color: "rgba(0,183,255, 1)",
   },
-  // change the ml to 15px
+
   image: {
-    marginLeft: "20px",
+    marginLeft: "15px",
   },
 }));

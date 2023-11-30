@@ -1,9 +1,9 @@
+import styles from "./styles/Wrapper.module.css";
 import { useState, useEffect } from "react";
-import "./App.css";
-import { Note } from "./models/noteModel";
-
+import { Note as NoteModel } from "./models/noteModel";
+import Note from "./components/Note";
 function App() {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<NoteModel[]>([]);
 
   useEffect(() => {
     async function getNotes() {
@@ -20,7 +20,13 @@ function App() {
     }
     getNotes();
   }, []);
-  return <div className="App">{JSON.stringify(notes)}</div>;
+  return (
+    <div className={styles.Wrapper}>
+      {notes.map((note) => (
+        <Note note={note} key={note._id} />
+      ))}
+    </div>
+  );
 }
 
 export default App;

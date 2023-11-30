@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import { Button } from "react-bootstrap";
+import { Note } from "./models/noteModel";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [notes, setNotes] = useState<Note[]>([]);
 
-  const addCount = () => {
-    setCount(count + 1);
-  };
-  return (
-    <div className="App">
-      <Button onClick={addCount}>Clicked {count} times</Button>
-    </div>
-  );
+  useEffect(() => {
+    async function getNotes() {
+      try {
+        const response = await fetch("http://localhost:5000/api/notes", {
+          method: "GET",
+        });
+        const notes = await response.json();
+        setNotes(notes);
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
+    }
+    getNotes();
+  }, []);
+  return <div className="App">{JSON.stringify(notes)}</div>;
 }
 
 export default App;

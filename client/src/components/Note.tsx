@@ -1,22 +1,32 @@
 import styles from "../styles/Note.module.css";
 import { Card } from "react-bootstrap";
 import { Note as NoteModal } from "../models/noteModel";
+import { formatDate } from "../utils/formatDate";
 
 interface NoteProps {
   note: NoteModal;
+  className?: string;
 }
 
-const Notes = ({ note }: NoteProps) => {
+const Notes = ({ note, className }: NoteProps) => {
   const { title, text, createdAt, updatedAt } = note;
 
+  let createdUpdatedText: string;
+  if (updatedAt > createdAt) {
+    createdUpdatedText = "Updated: " + formatDate(updatedAt);
+  } else {
+    createdUpdatedText = "Created: " + formatDate(createdAt);
+  }
   return (
-    <Card className={styles.noteCard}>
-      <Card.Body>
+    <Card className={`${styles.noteCard} ${className}`}>
+      <Card.Body className={styles.cardBody}>
         <Card.Title>{title}</Card.Title>
         <Card.Text className={styles.cardText}>{text}</Card.Text>
-        <Card.Text>{createdAt}</Card.Text>
         <Card.Text>{updatedAt}</Card.Text>
       </Card.Body>
+      <Card.Footer className="text-muted">
+        <Card.Text>{createdUpdatedText}</Card.Text>
+      </Card.Footer>
     </Card>
   );
 };

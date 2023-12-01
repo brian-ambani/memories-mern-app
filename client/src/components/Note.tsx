@@ -22,7 +22,6 @@ const Notes = ({ note, className }: NoteProps) => {
       <Card.Body className={styles.cardBody}>
         <Card.Title>{title}</Card.Title>
         <Card.Text className={styles.cardText}>{text}</Card.Text>
-        <Card.Text>{updatedAt}</Card.Text>
       </Card.Body>
       <Card.Footer className="text-muted">
         <Card.Text>{createdUpdatedText}</Card.Text>
